@@ -23,6 +23,7 @@ const test = function() {
     actual: number.one
   });
 
+  summary();
 }
 
 test();
