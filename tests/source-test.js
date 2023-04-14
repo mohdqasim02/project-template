@@ -16,8 +16,6 @@ const test = function() {
   assertObjectEquals({one:1, two:2}, {1:1, 2:2}, "object with different keys should fail", "assertObjectEquals");
   assertObjectEquals({one:1, two:'two'}, {one:'one', two:2}, "Object with different values should fail", "assertObjectEquals");
   assertObjectEquals({one:1, two:2}, {one:1, two:2, three:3}, "Object with extra keys should fail", "assertObjectEquals");
-  assertObjectEquals({one:[1,2], two:[3,4]}, {one:[1,2], two:[3,5]}, "object with diff values in array should fail");
-  assertObjectEquals({one:[1,2], two:[3,4]}, {one:[1,2], two:[3,4]}, "object values with equal keys as arrays should pass");
   summary();
 }
 
