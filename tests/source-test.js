@@ -7,20 +7,20 @@ const assertEquals = testing.assertEquals;
 const summary = testing.summary;
 const title = testing.title;
 
-const test = function() {
+const it = function (testName, funcName, testData) {
+  assertEquals(testData.expected, testData.actual, testName, funcName);
+};
 
-  let it = function (testName, funcName, testData) {
-    assertEquals(testData.expected, testData.actual, testName, funcName);
-  };
+const test = function() {
 
   it("assertEquals should pass", "assertEquals", {
     expected: number.zero, 
-    actual: 1, 
+    actual: number.zero 
   });
 
   it("assertEquals should fail", "assertEquals", {
     expected: number.zero,
-    actual: number.zero
+    actual: number.one
   });
 
 }
