@@ -8,7 +8,7 @@ const assertEquals = testing.assertEquals;
 const summary = testing.summary;
 const title = testing.title;
 
-let it = function (testName, funcName, testData) {
+let it = function(testName, funcName, testData) {
   assertEquals(testData.expected, testData.actual, testName, funcName);
 };
 
