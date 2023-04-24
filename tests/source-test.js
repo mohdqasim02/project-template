@@ -1,10 +1,13 @@
 const testing = require("../lib/test-framework.js");
+const format = require("../lib/format.js");
 const number = require("../src/source.js");
+
+const title = format.title;
+const display = format.display;
 
 const areEqual = testing.areEqual;
 const assert = testing.assert;
 const summary = testing.summary;
-const title = testing.title;
 
 const it = function(testName, funcName, testData) {
   assert(testName, funcName, testData);
@@ -68,7 +71,7 @@ const testAssert = function() {
 }
 
 const test = function() {
-  title("Testing test-framework.js");
+  display(title("Testing test-framework.js"));
   testAssert();
   summary();
 }
