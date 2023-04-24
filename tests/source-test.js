@@ -1,94 +1,75 @@
 const testing = require("../lib/test-framework.js");
 const number = require("../src/source.js");
 
-const areArraysEqual = testing.areArraysEqual;
-const are2dArraysEqual = testing.are2dArraysEqual;
-const areObjectsEqual = testing.areObjectsEqual;
-const assertEquals = testing.assertEquals;
+const areEqual = testing.areEqual;
+const assert = testing.assert;
 const summary = testing.summary;
 const title = testing.title;
 
-let it = function(testName, funcName, testData) {
-  assertEquals(testData.expected, testData.actual, testName, funcName);
+const it = function(testName, funcName, testData) {
+  assert(testName, funcName, testData);
 };
 
-const testAssertEquals = function() {
-  title("assertEquals()");
-
-  it("should pass if elements are equal", "assertEquals", {
+const testAssert = function() {
+  it("should pass if elements are equal", "areEqual", {
     expected: number.zero, 
     actual: number.zero 
   });
 
-  it("should fail if elements are not equal", "assertEquals", {
+  it("should fail if elements are not equal", "areEqual", {
     expected: false,
     actual: number.one === number.zero,
   });
-}
 
-const testAssertArrayEquals = function() {
-  title("areArraysEqual()");
-
-  it("should pass when two list are equal", "areArraysEqual", {
+  it("should pass when two list are equal", "areEqual", {
     expected: true, 
-    actual: areArraysEqual([1, 2, 3], [1, 2, 3])
+    actual: areEqual([1, 2, 3], [1, 2, 3])
   });
 
-  it("should fail when two list are not equal", "areArraysEqual", {
+  it("should fail when two list are not equal", "areEqual", {
     expected: false, 
-    actual: areArraysEqual([1, 2, 4], [1, 2, 3])
+    actual: areEqual([1, 2, 4], [1, 2, 3])
   });
 
-  it("should fail when size two list are not equal", "areArraysEqual", {
+  it("should fail when size two list are not equal", "areEqual", {
     expected: false, 
-    actual: areArraysEqual([1, 2], [1, 2, 3])
+    actual: areEqual([1, 2], [1, 2, 3])
   });
-}
 
-const testAre2dArraysEqual = function() {
-  title("are2dArraysEqual()");
-
-  it("should pass when two list are equal", "are2dArraysEqual", {
+  it("should pass when two list are equal", "areEqual", {
     expected: true, 
-    actual: are2dArraysEqual([1, 2, 3], [1, 2, 3])
+    actual: areEqual([1, [2], '3', {a:2}], [1, [2], '3', {a:2}])
   });
 
-  it("should fail when two list are not equal", "are2dArraysEqual", {
+  it("should fail when two list are not equal", "areEqual", {
     expected: false, 
-    actual: are2dArraysEqual([1, [2, 4]], [1, [2, 3]])
+    actual: areEqual([1, [2, 4]], [1, [2, 3]])
   });
 
-  it("should fail when size two list are not equal", "are2dArraysEqual", {
+  it("should fail when size two list are not equal", "areEqual", {
     expected: false, 
-    actual: are2dArraysEqual([1, 2], [1, 2, 3])
+    actual: areEqual([1, 2], [1, 2, 3])
   });
-}
 
-const testAreObjectsEqual = function() {
-  title("areObjectsEqual()");
-
-  it("should pass when two sets are equal", "areObjectsEqual", {
+  it("should pass when two sets are equal", "areEqual", {
     expected: true, 
-    actual: areObjectsEqual({1:1, 2:2, 3:3}, {1:1, 2:2, 3:3})
+    actual: areEqual({1:1, 2:2, 3:3}, {1:1, 2:2, 3:3})
   });
 
-  it("should fail when two sets are not equal", "areObjectsEqual", {
+  it("should fail when two sets are not equal", "areEqual", {
     expected: false, 
-    actual: areObjectsEqual({1:'1', 2:2}, {1:'one', 2:'two'})
+    actual: areEqual({1:'1', 2:2}, {1:'one', 2:'two'})
   });
 
-  it("should fail when size two sets are not equal", "areObjectsEqual", {
-    expected: false, 
-    actual: areObjectsEqual({1:1}, {1:1, 2:2})
+  it("should pass with different data types and nesting", "areEqual", {
+    expected: true, 
+    actual: areEqual({1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}}, {1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}})
   });
 }
 
 const test = function() {
   title("Testing test-framework.js");
-  testAssertEquals();
-  testAssertArrayEquals();
-  testAre2dArraysEqual();
-  testAreObjectsEqual();
+  testAssert();
   summary();
 }
 
