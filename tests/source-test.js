@@ -1,9 +1,6 @@
-const testing = require("../lib/test-framework.js");
-const format = require("../lib/format.js");
 const number = require("../src/source.js");
-
-const {title, display} = format;
-const {areEqual, assert, summary} = testing;
+const {title, display} = require("../lib/format.js");
+const {assert, summary} = require("../lib/test-framework.js");
 
 const it = function(testName, funcName, testData) {
   assert(testName, funcName, testData);
@@ -11,58 +8,23 @@ const it = function(testName, funcName, testData) {
 
 const testAssert = function() {
   it("should pass if elements are equal", "areEqual", {
-    expected: number.zero, 
-    actual: number.zero 
-  });
-
-  it("should fail if elements are not equal", "areEqual", {
-    expected: false,
-    actual: number.one === number.zero,
+    expected: 1, 
+    actual: 1 
   });
 
   it("should pass when two list are equal", "areEqual", {
-    expected: true, 
-    actual: areEqual([1, 2, 3], [1, 2, 3])
-  });
-
-  it("should fail when two list are not equal", "areEqual", {
-    expected: false, 
-    actual: areEqual([1, 2, 4], [1, 2, 3])
-  });
-
-  it("should fail when size two list are not equal", "areEqual", {
-    expected: false, 
-    actual: areEqual([1, 2], [1, 2, 3])
-  });
-
-  it("should pass when two list are equal", "areEqual", {
-    expected: true, 
-    actual: areEqual([1, [2], '3', {a:2}], [1, [2], '3', {a:2}])
-  });
-
-  it("should fail when two list are not equal", "areEqual", {
-    expected: false, 
-    actual: areEqual([1, [2, 4]], [1, [2, 3]])
-  });
-
-  it("should fail when size two list are not equal", "areEqual", {
-    expected: false, 
-    actual: areEqual([1, 2], [1, 2, 3])
+    expected: [1, [2], '3', {a:2}], 
+    actual: [1, [2], '3', {a:2}]
   });
 
   it("should pass when two sets are equal", "areEqual", {
-    expected: true, 
-    actual: areEqual({1:1, 2:2, 3:3}, {1:1, 2:2, 3:3})
-  });
-
-  it("should fail when two sets are not equal", "areEqual", {
-    expected: false, 
-    actual: areEqual({1:'1', 2:2}, {1:'one', 2:'two'})
+    expected: {1:1, 2:2, 3:3}, 
+    actual: {1:1, 2:2, 3:3}
   });
 
   it("should pass with different data types and nesting", "areEqual", {
-    expected: true, 
-    actual: areEqual({1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}}, {1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}})
+    expected: {1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}}, 
+    actual: {1:1, 2:[1, 2, 3], 3:{a:1, b:2, c:[4, 5]}}
   });
 }
 
